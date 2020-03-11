@@ -8,6 +8,7 @@ setup(
     author_email="seba@cloudnative.co.jp",
     packages=find_packages(),
     install_requires=[
+        "jsonschema"
     ],
     entry_points={
         "console_scripts": [
