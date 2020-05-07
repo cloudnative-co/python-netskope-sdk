@@ -1,4 +1,5 @@
 import json
+import re
 import urllib.request
 import urllib.parse
 from .Exception import APIException
@@ -46,6 +47,7 @@ class Client(object):
             args["data"] = payload
         else:
             payload = b""
+        print(args)
         req = urllib.request.Request(**args)
         try:
             with urllib.request.urlopen(req) as res:
@@ -59,6 +61,13 @@ class Client(object):
         body = res.read().decode("utf-8")
         if body is "" or body is None:
             return {}
+        regex = r"(\"[^\":,]+?_id\"):([0-9]+)"
+        matches = re.findall(regex, body)
+        for m in matches:
+            body = body.replace(
+                m[0] + ":" + m[1],
+                m[0] + ":\""+ m[1] + "\""
+            )
         body = json.loads(body)
         status = body.get("status", None)
         if status is None:
