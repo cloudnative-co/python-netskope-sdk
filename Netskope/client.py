@@ -47,7 +47,6 @@ class Client(object):
             args["data"] = payload
         else:
             payload = b""
-        print(args)
         req = urllib.request.Request(**args)
         try:
             with urllib.request.urlopen(req) as res:
