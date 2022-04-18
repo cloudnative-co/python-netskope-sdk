@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+    NetskopeSDK:
+        Type: AWS::Serverless::LayerVersion
+        Properties:
+            LayerName: Netskope
+            Description: Netskope API Access SDK for Python 3
+            ContentUri: lib
+            RetentionPolicy: Retain
+            CompatibleRuntimes:
+              - python3.6
+              - python3.7
+              - python3.8
+              - python3.9
+Outputs:
+    NetskopeSDK:
+        Value: !Ref NetskopeSDK
+        Export:
+            Name: NetskopeSDK
+
+
